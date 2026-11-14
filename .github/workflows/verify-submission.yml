@@ -38,5 +38,5 @@ jobs:
           PR_NUMBER: ${{ github.event.issue.number }}
           REPOSITORY: ${{ github.repository }}
         run: |
-          gh api repos/$REPOSITORY/issues/$PR_NUMBER/comments -f body="✅ **ExtenHub: publicación aprobada.** La extensión fue añadida al catálogo y recibió un ID único. Su estado es `verified`. Esto indica revisión del equipo ExtenHub, no certificación oficial del navegador."
+          gh api repos/$REPOSITORY/issues/$PR_NUMBER/comments -f body="✅ **ExtenHub: publicación aprobada.** La extensión fue añadida al catálogo y recibió un ID único. Su estado es verified. Esto indica revisión del equipo ExtenHub, no certificación oficial del navegador."
           gh api repos/$REPOSITORY/issues/$PR_NUMBER -X PATCH -f state=closed
