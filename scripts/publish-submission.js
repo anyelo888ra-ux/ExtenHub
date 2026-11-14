@@ -30,7 +30,7 @@ async function gh(endpoint) {
   const duplicate = db.extensions.some(x => x.name.toLowerCase() === item.name.toLowerCase() || x.download_url === item.download_url);
   if (duplicate) throw new Error('Ya existe una extensión con ese nombre o URL de descarga.');
   const id = crypto.randomUUID();
-  const entry = { id, ...item, status: 'verified', verified_at: new Date().toISOString(), pull_request: Number(pr) };
+  const entry = { ...item, id, status: 'verified', verified_at: new Date().toISOString(), pull_request: Number(pr) };
   db.extensions.push(entry);
   fs.writeFileSync('database.json', JSON.stringify(db, null, 2) + '\n');
   fs.mkdirSync('extensions', { recursive: true });
