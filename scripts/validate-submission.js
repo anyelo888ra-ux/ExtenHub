@@ -12,7 +12,7 @@ async function api(path) {
   const files = await api('/repos/' + repo + '/pulls/' + pr + '/files?per_page=100');
   const changed = files.filter(f => f.status === 'added' && /^submissions\/[a-z0-9][a-z0-9-]*\.json$/i.test(f.filename));
   if (pull.base.ref !== 'main' || changed.length !== 1 || files.length !== 1) throw new Error('El PR debe añadir exactamente un JSON en submissions/ contra main.');
-  const raw = await fetch('https://raw.githubusercontent.com/' + repo + '/' + pull.head.sha + '/' + changed[0].filename);
+  const raw = await fetch('https://raw.githubusercontent.com/' + pull.head.repo.full_name + '/' + pull.head.sha + '/' + changed[0].filename);
   if (!raw.ok) throw new Error('No se pudo descargar el JSON del PR.');
   const item = await raw.json();
   const required = ['name','author','description','browsers','version','category','download_url'];
