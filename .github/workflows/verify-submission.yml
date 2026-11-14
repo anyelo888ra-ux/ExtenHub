@@ -7,7 +7,7 @@ on:
 permissions:
   contents: write
   pull-requests: read
-  issues: read
+  issues: write
 
 jobs:
   publish:
@@ -32,3 +32,11 @@ jobs:
           if git diff --cached --quiet; then echo "No catalog changes"; exit 0; fi
           git commit -m "Publish verified extension from PR #${{ github.event.issue.number }}"
           git push origin HEAD:main
+      - name: Confirm publication and close submission PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.issue.number }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          gh api repos/$REPOSITORY/issues/$PR_NUMBER/comments -f body="✅ **ExtenHub: publicación aprobada.** La extensión fue añadida al catálogo y recibió un ID único. Su estado es `verified`. Esto indica revisión del equipo ExtenHub, no certificación oficial del navegador."
+          gh api repos/$REPOSITORY/issues/$PR_NUMBER -X PATCH -f state=closed
