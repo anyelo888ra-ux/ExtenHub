@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#101827">
+<meta name="description" content="ExtenHub: descubre y comparte extensiones para tus navegadores favoritos.">
+<title>ExtenHub — Discover extensions</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./">🧩 ExtenHub</a><nav><a href="#catalog">Explorar</a><a href="https://github.com/anyelo888ra-ux/ExtenHub">GitHub</a><a class="button small" href="https://github.com/anyelo888ra-ux/ExtenHub/fork">Publicar extensión</a></nav></header>
+<main>
+<section class="hero"><p class="eyebrow">DISCOVER · PUBLISH · SHARE</p><h1>Tu próximo complemento<br><span>está aquí.</span></h1><p>Un catálogo comunitario de extensiones para Firefox, Chrome, Edge y más.</p><div class="hero-actions"><a class="button" href="#catalog">Explorar catálogo</a><a class="button secondary" href="https://github.com/anyelo888ra-ux/ExtenHub/fork">Publicar en GitHub</a></div></section>
+<section id="catalog" class="catalog"><div class="section-heading"><div><p class="eyebrow">CATÁLOGO COMUNITARIO</p><h2>Extensiones</h2></div><span id="count" class="muted">Cargando…</span></div>
+<div class="toolbar"><input id="search" type="search" placeholder="Buscar extensiones…" aria-label="Buscar extensiones"><select id="browser" aria-label="Filtrar por navegador"><option value="">Todos los navegadores</option><option>Firefox</option><option>Chrome</option><option>Edge</option><option>Other</option></select></div>
+<div id="catalog-grid" class="grid" aria-live="polite"><p class="muted">Cargando catálogo…</p></div><p id="empty" class="empty" hidden>No se encontraron extensiones.</p>
+</section>
+</main><footer><strong>ExtenHub</strong><span>Publicaciones revisadas por administradores. Verified no significa certificación oficial del navegador.</span></footer>
+<script src="database.js"></script>
+</body></html>
