@@ -1,0 +1,14 @@
+{
+  "name": "Nombre de tu extensión",
+  "author": "Tu nombre o alias",
+  "description": "Describe brevemente qué hace tu extensión.",
+  "browsers": ["Firefox"],
+  "version": "1.0.0",
+  "category": "Productivity",
+  "download_url": "https://example.com/extension.xpi",
+  "website_url": "",
+  "source_url": "",
+  "license": "MIT",
+  "permissions": [],
+  "screenshots": []
+}
