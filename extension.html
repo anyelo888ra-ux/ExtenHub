@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#101827"><title>Extensión — ExtenHub</title><link rel="stylesheet" href="styles.css"></head>
+<body><header class="topbar"><a class="brand" href="./">🧩 ExtenHub</a><nav><a href="./#catalog">Catálogo</a><a href="https://github.com/anyelo888ra-ux/ExtenHub">GitHub</a></nav></header><main><section class="catalog" id="details"><p class="muted">Cargando extensión…</p></section></main><footer><strong>ExtenHub</strong><span>Verified significa revisada por el equipo de ExtenHub, no certificada por el navegador.</span></footer>
+<script>
+(async () => {
+ const root=document.getElementById('details');
+ const id=new URLSearchParams(location.search).get('q');
+ const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ if(!id){root.innerHTML='<h1>404 — Extensión no encontrada</h1><p class="muted">Falta el identificador de la extensión.</p><a class="button" href="./">Volver al catálogo</a>';return;}
+ try{
+  const r=await fetch('database.json',{cache:'no-store'});if(!r.ok)throw Error();
+  const data=await r.json();const x=(data.extensions||[]).find(v=>v.id===id&&v.status==='verified');
+  if(!x)throw Error();
+  const u=new URL(x.download_url);if(!['https:','http:'].includes(u.protocol))throw Error();
+  document.title=x.name+' — ExtenHub';
+  root.innerHTML='<p class="eyebrow">EXTENHUB / EXTENSION</p><h1>'+esc(x.name)+'</h1><p class="muted">Por '+esc(x.author)+' · '+esc((x.browsers||[]).join(', '))+'</p><p style="max-width:720px;font-size:18px">'+esc(x.description)+'</p><p><span class="tag verified">✓ Verified por ExtenHub</span></p><p class="muted">ID: <code>'+esc(x.id)+'</code></p><p><a class="button" href="'+esc(u.href)+'" target="_blank" rel="noopener noreferrer">Abrir descarga</a> <a class="button secondary" href="./#catalog">Volver</a></p>';
+ }catch{root.innerHTML='<h1>404 — Extensión no encontrada</h1><p class="muted">Esta extensión no existe o todavía no ha sido aprobada.</p><a class="button" href="./">Volver al catálogo</a>';}
+})();
+</script></body></html>
