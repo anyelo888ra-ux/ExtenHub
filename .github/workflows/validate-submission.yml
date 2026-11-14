@@ -14,10 +14,14 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout base repository
+      - name: Checkout trusted main branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: main
           persist-credentials: false
-      - name: Validate submission JSON
+      - name: Validate submitted JSON through GitHub API
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: node scripts/validate-submission.js
